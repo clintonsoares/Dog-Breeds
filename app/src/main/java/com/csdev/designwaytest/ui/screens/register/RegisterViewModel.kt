@@ -21,7 +21,6 @@ class RegisterViewModel @Inject constructor(
         val mUser = User(username = username,password = password, fullName = fullName)
         launch {
             startLoading("Registering User, please wait...")
-            delay(2000)
             launch {
                 registerUserUseCase(mUser).collect { result ->
                     stopLoading()

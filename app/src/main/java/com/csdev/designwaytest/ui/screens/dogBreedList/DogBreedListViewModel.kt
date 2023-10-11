@@ -46,8 +46,9 @@ class DogBreedListViewModel @Inject constructor(
     fun userLogOut() {
         launch {
             startLoading()
-            userPreferences.setUserLoggedIn(false)
-            _isLogoutSuccessful.emit(true)
+            userPreferences.setUserLoggedIn(false).collect {
+                _isLogoutSuccessful.emit(it)
+            }
         }
     }
 

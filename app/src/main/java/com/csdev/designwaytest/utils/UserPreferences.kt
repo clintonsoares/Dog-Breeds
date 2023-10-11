@@ -9,6 +9,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.google.gson.Gson
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -23,10 +24,16 @@ class UserPreferences @Inject constructor(@ApplicationContext private val contex
             preferences[LOGGED_IN] ?: false
         }
 
-    suspend fun setUserLoggedIn(loggedIn : Boolean) {
-        context.dataStore.edit { preferences ->
-            preferences[LOGGED_IN] = loggedIn
+    suspend fun setUserLoggedIn(loggedIn : Boolean): Flow<Boolean> {
+        return try {
+            context.dataStore.edit { preferences ->
+                preferences[LOGGED_IN] = loggedIn
+            }
+            flow { emit(true) }
+        } catch (e: Exception) {
+            flow { emit(false) }
         }
+
     }
 
     companion object {

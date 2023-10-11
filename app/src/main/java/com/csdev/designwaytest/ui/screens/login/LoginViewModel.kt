@@ -36,7 +36,6 @@ class LoginViewModel @Inject constructor(
         val mUser = User(username = username,password = password)
         launch {
             startLoading("Logging in, please wait...")
-            delay(2000)
             loginUserUseCase(mUser).collect { result ->
                 stopLoading()
                 when (result) {
