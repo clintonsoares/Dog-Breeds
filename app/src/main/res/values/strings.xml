@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">DesignWayTest</string>
+    <string name="app_name_alt">Dog Breeds</string>
+
+    <string name="loading">Loading data, please wait…</string>
+    <string name="enter_login_details">Enter Login Details</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+    <string name="please_enter_username">Please Enter your Username</string>
+    <string name="please_enter_full_name">Please Enter your Full name</string>
+    <string name="please_enter_password">Please Enter your Password</string>
+    <string name="please_re_enter_password">Please Re-Enter your Password</string>
+    <string name="please_enter_valid_username">Please enter a valid username</string>
+    <string name="please_enter_valid_password">Please enter a valid password</string>
+    <string name="validation_password_must_be">Password must contain min 8 characters, 1 special character, 1 number and 1 capital letter</string>
+    <string name="both_passwords_should_match">Both passwords should match</string>
+    <string name="are_you_new_here_then">Are you new here?… Then,</string>
+    <string name="register_now">Register Now</string>
+    <string name="login_now">Login Now</string>
+    <string name="register_yourself">Register Yourself</string>
+    <string name="please_enter_your_full_name_separately">Please enter your full name separately</string>
+    <string name="user_registered_successfully">User registered successfully</string>
+    <string name="dog_breeds">Dog breeds</string>
+    <string name="read_more">Read more</string>
+    <string name="no_data_found">No Data Found</string>
+</resources>
