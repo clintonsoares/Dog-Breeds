@@ -2,7 +2,7 @@
     <string name="app_name">DesignWayTest</string>
     <string name="app_name_alt">Dog Breeds</string>
 
-    <string name="loading">Loading data, please wait…</string>
+    <string name="loading">Loading…</string>
     <string name="enter_login_details">Enter Login Details</string>
     <string name="login">LOGIN</string>
     <string name="register">REGISTER</string>
@@ -23,4 +23,18 @@
     <string name="dog_breeds">Dog breeds</string>
     <string name="read_more">Read more</string>
     <string name="no_data_found">No Data Found</string>
+    <string name="error_fetching_data">Error fetching data</string>
+    <string name="refresh_and_try_again">Refresh and try again</string>
+    <string name="home">Home</string>
+    <string name="name">Name</string>
+    <string name="group">Group</string>
+    <string name="origin">Origin</string>
+    <string name="lifespan">Lifespan</string>
+    <string name="bred_for">Bred for</string>
+    <string name="temperament">Temperament</string>
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="imperial">Imperial</string>
+    <string name="metric">Metric</string>
+    <string name="logout">Logout</string>
 </resources>

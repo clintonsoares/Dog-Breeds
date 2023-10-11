@@ -21,6 +21,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -63,17 +64,23 @@ fun LoginScreen(
     var password by remember { mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
     var isPasswordError by remember { mutableStateOf(false) }
-    var isLoading by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(true) }
     var loaderMessage by remember { mutableStateOf<String?>(null) }
     var showLoginError by remember { mutableStateOf(false) }
     var loginErrorMessage by remember { mutableStateOf("") }
 
+    LaunchedEffect(viewModel) {
+        viewModel.checkUserLoggedIn()
+    }
     viewModel.isLoading.observeAsState().value?.let { isLoading = it }
     viewModel.loadingMessage.collectAsStateWithLifecycle().value?.let { loaderMessage = it }
     viewModel.errorMessage.collectAsStateWithLifecycle().value?.let {
         showLoginError = true
         password = ""
         loginErrorMessage = it
+    }
+    viewModel.isUserLoggedIn.collectAsStateWithLifecycle().value.let { isLoggedIn ->
+        if (isLoggedIn) navigateToDogBreedListScreen()
     }
     viewModel.isLoginSuccessful.collectAsStateWithLifecycle().value.let { isSuccess ->
         if (isSuccess) navigateToDogBreedListScreen()
@@ -111,9 +118,6 @@ fun LoginScreen(
                         style = MaterialTheme.typography.titleLarge,
                         modifier = Modifier
                             .padding(vertical = 8.dp)
-                            .clickable {
-                                navigateToDogBreedListScreen()
-                            }
                     )
 
                     // text fields

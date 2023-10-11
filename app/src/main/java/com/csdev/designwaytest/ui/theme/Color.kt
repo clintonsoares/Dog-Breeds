@@ -12,6 +12,7 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val ColorBlack80F = Color(0xCC000000)
+val ColorBlack50F = Color(0x80000000)
 val BackgroundWhite70F = Color(0x99FFFFFF)
 val BorderWhite30F = Color(0x4DFFFFFF)
 val ColorTextField = Color(0xFFF1F1F1)

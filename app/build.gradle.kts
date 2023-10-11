@@ -117,6 +117,9 @@ dependencies {
 
     //Coil image loader
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    // datastore - shared preferences
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }
 
 // Allow references to generated code

@@ -1,6 +1,9 @@
 package com.csdev.designwaytest.di
 
+import com.csdev.designwaytest.domain.repository.DogBreedsRepository
 import com.csdev.designwaytest.domain.repository.UserRepository
+import com.csdev.designwaytest.domain.useCase.dogbreeds.GetDogBreedDetailsUseCase
+import com.csdev.designwaytest.domain.useCase.dogbreeds.GetDogBreedsUseCase
 import com.csdev.designwaytest.domain.useCase.users.LoginUserUseCase
 import com.csdev.designwaytest.domain.useCase.users.RegisterUserUseCase
 import dagger.Module
@@ -24,5 +27,17 @@ object UseCaseModule {
     fun provideRegisterUserUseCase(
         repository: UserRepository
     ): RegisterUserUseCase = RegisterUserUseCase(repository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetDogBreedsUseCase(
+        repository: DogBreedsRepository
+    ): GetDogBreedsUseCase = GetDogBreedsUseCase(repository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetDogBreedDetailsUseCase(
+        repository: DogBreedsRepository
+    ): GetDogBreedDetailsUseCase = GetDogBreedDetailsUseCase(repository)
 
 }

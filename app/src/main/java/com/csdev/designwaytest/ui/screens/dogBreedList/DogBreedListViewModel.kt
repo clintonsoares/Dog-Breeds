@@ -4,17 +4,22 @@ import com.csdev.designwaytest.domain.model.DogBreedListItem
 import com.csdev.designwaytest.domain.useCase.dogbreeds.GetDogBreedsUseCase
 import com.csdev.designwaytest.ui.BaseViewModel
 import com.csdev.designwaytest.utils.Resource
+import com.csdev.designwaytest.utils.UserPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
 class DogBreedListViewModel @Inject constructor(
-    private val getDogBreedsUseCase: GetDogBreedsUseCase
+    private val getDogBreedsUseCase: GetDogBreedsUseCase,
+    private val userPreferences: UserPreferences
 ): BaseViewModel() {
     private val _dogBreeds = MutableStateFlow(listOf<DogBreedListItem>())
     val dogBreeds = _dogBreeds.asStateFlow()
+    private val _isLogoutSuccessful = MutableStateFlow(false)
+    val isLogoutSuccessful = _isLogoutSuccessful.asStateFlow()
 
     fun getDogBreeds() {
         launch {
@@ -35,6 +40,14 @@ class DogBreedListViewModel @Inject constructor(
                 }
 
             }
+        }
+    }
+
+    fun userLogOut() {
+        launch {
+            startLoading()
+            userPreferences.setUserLoggedIn(false)
+            _isLogoutSuccessful.emit(true)
         }
     }
 

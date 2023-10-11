@@ -12,12 +12,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.KeyboardDoubleArrowRight
+import androidx.compose.material.icons.rounded.Logout
+import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -70,10 +75,12 @@ fun DogBreedListScreen(
     viewModel.dogBreeds.collectAsStateWithLifecycle().value.let {
         dogBreeds = it
     }
-
     viewModel.errorMessage.collectAsStateWithLifecycle().value?.let {
         showApiError = true
         apiErrorMessage = it
+    }
+    viewModel.isLogoutSuccessful.collectAsStateWithLifecycle().value.let { isTrue ->
+        if (isTrue) navigateToLoginScreen()
     }
 
     BaseComposeScreen(isLoading = isLoading, loaderMessage = loaderMessage) {
@@ -87,25 +94,33 @@ fun DogBreedListScreen(
                     .fillMaxWidth(),
                 shape = RectangleShape,
                 colors = CardDefaults.cardColors(
-                    containerColor = Color.White,
-                    contentColor = Purple40
+                    containerColor = Purple40,
+                    contentColor = Color.White
                 ),
                 elevation = CardDefaults.cardElevation(
                     defaultElevation = 4.dp
                 )
             ) {
+                // signout button
+                IconButton(
+                    onClick = {
+                        viewModel.userLogOut()
+                    },
+                    modifier = Modifier.align(Alignment.End)
+                ) {
+                    Icon(
+                        Icons.Rounded.Logout,
+                        "back arrow"
+                    )
+                }
+
                 // Header
                 Text(
                     text = stringResource(id = R.string.dog_breeds).uppercase(),
                     style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier
-                        .padding(vertical = 40.dp)
+                        .padding(bottom = 40.dp)
                         .align(Alignment.CenterHorizontally)
-                        .clickable {
-                            if (Utilities.isInternetAvailable(context)) {
-                                viewModel.getDogBreeds()
-                            }
-                        }
                 )
             }
 
@@ -145,6 +160,22 @@ fun DogBreedListScreen(
 
             }
 
+        }
+
+        FloatingActionButton(
+            onClick = {
+                if (Utilities.isInternetAvailable(context)) {
+                    viewModel.getDogBreeds()
+                }
+            },
+            modifier = Modifier
+                .padding(bottom = 12.dp, end = 12.dp)
+                .align(Alignment.BottomEnd),
+            shape = CircleShape,
+            containerColor = Purple40,
+            contentColor = Color.White
+        ) {
+            Icon(Icons.Rounded.Refresh,"refresh")
         }
 
         if (showApiError) {
