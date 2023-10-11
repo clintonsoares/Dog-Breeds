@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase
 import com.csdev.designwaytest.data.local.dao.UserDAO
 import com.csdev.designwaytest.data.local.entity.UserEntity
 
+// user database
 @Database(
     entities = [UserEntity::class],
     version = 1

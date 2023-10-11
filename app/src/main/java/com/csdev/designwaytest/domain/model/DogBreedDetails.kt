@@ -1,5 +1,6 @@
 package com.csdev.designwaytest.domain.model
 
+// model class for single Dog Breed with extra details
 data class DogBreedDetails(
     var name: String? = null,
     var bredFor: String? = null,

@@ -19,6 +19,7 @@ class DogBreedsRepositoryImpl@Inject constructor(
         return flow {
             try {
                 api.getDogBreeds(limit = limit, page = page).let { dto ->
+                    // map entity data to model data
                     val result = DogBreedsListMapper.map(dto)
                     emit(result)
                 }
@@ -33,6 +34,7 @@ class DogBreedsRepositoryImpl@Inject constructor(
     override suspend fun getDogBreedDetails(referenceImageId: String): Flow<Resource<DogBreedDetails>> {
         return flow {
             try {
+                // map entity data to model data
                 api.getDogBreedDetails(referenceImageId).let { dto ->
                     val result = DogBreedDetailsMapper.map(dto)
                     emit(result)

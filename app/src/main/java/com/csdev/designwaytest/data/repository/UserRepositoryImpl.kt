@@ -14,6 +14,7 @@ class UserRepositoryImpl @Inject constructor(
 ) : UserRepository {
 
     override suspend fun registerUser(user: User): Flow<Resource<Boolean>> {
+        // check if user is already registered
         return dao.findUser(user.username).let { isRegistered ->
             flow {
                 if (isRegistered) {
@@ -28,8 +29,8 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun loginUser(user: User): Flow<Resource<Boolean>> {
+        // get user entry from db
         val dBEntry = dao.getUser(user.username)
-
         dBEntry?.let { entry ->
             if (entry.password.equals(user.password,false)) {
                 return flow {

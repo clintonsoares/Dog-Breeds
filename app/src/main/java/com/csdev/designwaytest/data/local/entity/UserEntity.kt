@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-// Entity for Currency table
+// Entity for User table
 @Entity
 data class UserEntity(
     val fullName: String,
